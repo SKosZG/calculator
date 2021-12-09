@@ -1,0 +1,75 @@
+/* css reset */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+/* code */
+main {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+#calcBody {
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+}
+
+#calcDisplay {
+  padding: 5px;
+  text-align: right;
+  color: white;
+  background-color: gray;
+}
+
+#calcBtns {
+  background-color: greenyellow;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: tomato;
+}
+
+.calcBtn {
+  flex: 1;
+  background-color: rebeccapurple;
+  color: white;
+  margin: 5px;
+}
+
+#resultBtns {
+  flex: 2;
+  display: flex;
+  width: 100%;
+  margin: 0px 5px;
+}
+
+.resultBtn {
+  margin: 5px 0;
+}
+
+#resultBtns button:first-child {
+  margin-right: 10px;
+}
+
+.btnZero {
+  flex: 2;
+}
