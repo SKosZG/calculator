@@ -1,41 +1,65 @@
-let number1, number2, operator, result;
+let number1, number2, operator, result, display;
 
-const operate = () => {
-  number1 = prompt("Please enter first number");
-  number2 = prompt("Please enter second number");
-  operator = prompt("Please enter operator");
+const calcResult = document.querySelector("#calcResult");
+const calcBtn = document.querySelectorAll(".calcBtn");
 
-  switch (operator) {
-    case "+":
-      result = add(number1, number2);
-      break;
-    case "-":
-      result = sub(number1, number2);
-      break;
-    case "/":
-      result = div(number1, number2);
-      break;
-    case "*":
-      result = mult(number1, number2);
-      break;
-  }
-  console.log(result);
-};
+calcBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    if (/\D$/.test(calcResult.textContent)) {
+      switch (e.target.textContent) {
+        case "=":
+          result = result.slice(0, -1);
+          result = Function("return " + result)();
+          calcResult.textContent = "=" + result;
+          display = result;
+          break;
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+          result = result.slice(0, -1);
+          break;
+      }
+    }
 
-const add = (a, b) => {
-  return parseFloat(a) + parseFloat(b);
-};
+    switch (e.target.textContent) {
+      case "=":
+        result = Function("return " + result)();
+        calcResult.textContent = "=" + result;
+        display = result;
+        break;
+      case "DEL":
+        if (/[=]/.test(calcResult.textContent)) {
+          break;
+        }
+        switch (calcResult.textContent) {
+          case "0":
+            break;
+          default:
+            result = result.slice(0, -1);
+            calcResult.textContent = result;
+            break;
+        }
 
-const sub = (a, b) => {
-  return parseFloat(a) - parseFloat(b);
-};
-
-const div = (a, b) => {
-  return parseFloat(a) / parseFloat(b);
-};
-
-const mult = (a, b) => {
-  return parseFloat(a) * parseFloat(b);
-};
-
-// operate();
+      case "C":
+        calcResult.textContent = 0;
+        result = "0";
+        break;
+      default:
+        if (result == undefined || result == 0) {
+          switch (e.target.textContent) {
+            case "*":
+            case "/":
+              break;
+            default:
+              result = e.target.textContent;
+              break;
+          }
+        } else {
+          result = result + e.target.textContent;
+        }
+        calcResult.textContent = result;
+        break;
+    }
+  });
+});
